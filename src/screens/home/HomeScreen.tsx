@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, TouchableOpacity } from "react-native";
 import * as NavigationService from "react-navigation-helpers";
+import Orientation from "react-native-orientation-locker";
 /**
  * ? Local Imports
  */
@@ -14,6 +15,15 @@ interface IProps {}
 interface IState {}
 
 export default class HomeScreen extends Component<IProps, IState> {
+  constructor(props) {
+    super(props);
+    Orientation.lockToPortrait();
+  }
+
+  componentDidMount() {
+    Orientation.lockToPortrait();
+  }
+
   render() {
     return (
       <View style={styles.container}>
