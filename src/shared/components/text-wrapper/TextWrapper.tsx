@@ -1,5 +1,6 @@
 import React from "react";
 import RNText, { IRNTextProps } from "@freakycoder/react-native-custom-text";
+import fonts from "@fonts";
 
 interface ITextWrapperProps extends IRNTextProps {
   color?: string;
@@ -8,8 +9,8 @@ interface ITextWrapperProps extends IRNTextProps {
 }
 
 const TextWrapper: React.FC<ITextWrapperProps> = ({
-  fontFamily = "Helvetica",
-  color = "#fff",
+  fontFamily = fonts.seuzOne.regular,
+  color = "#bbb",
   children,
   ...rest
 }) => {

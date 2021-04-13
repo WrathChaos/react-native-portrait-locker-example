@@ -14,28 +14,33 @@ interface IProps {}
 
 interface IState {}
 
-export default class HomeScreen extends Component<IProps, IState> {
-  constructor(props) {
-    super(props);
-    Orientation.lockToPortrait();
-  }
+const HomeScreen = ({ navigation }) => {
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      // The screen is focused
+      // Call any action
+      Orientation.unlockAllOrientations();
+      Orientation.lockToPortrait();
+    });
 
-  componentDidMount() {
-    Orientation.lockToPortrait();
-  }
+    // Return the function to unsubscribe from the event so it gets removed on unmount
+    return unsubscribe;
+  }, [navigation]);
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text h1> HomeScreen </Text>
-        <TouchableOpacity
-          style={styles.buttonStyle}
-          onPress={() => NavigationService.navigate(SCREENS.DETAIL)}
-        >
-          <Text color={colors.light.white}>Go To Detail Screen</Text>
-        </TouchableOpacity>
-        <Text h5></Text>
-      </View>
-    );
-  }
-}
+  return (
+    <View style={styles.container}>
+      <Text h1 bold>
+        HomeScreen
+      </Text>
+      <TouchableOpacity
+        style={styles.buttonStyle}
+        onPress={() => NavigationService.navigate(SCREENS.DETAIL)}
+      >
+        <Text color={colors.light.white}>Go To Detail Screen</Text>
+      </TouchableOpacity>
+      <Text h5></Text>
+    </View>
+  );
+};
+
+export default HomeScreen;
